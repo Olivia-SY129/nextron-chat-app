@@ -23,34 +23,45 @@ React, Typescript, MUI, Nextron, firebase, git
 1. 레포지토리를 내려받는다.
 2. `renderer/lib/firebase/app.ts` 파일에 환경 변수 입력
 
-```js
-// renderer/lib/firebase/app.ts
+   ```js
+   // renderer/lib/firebase/app.ts
 
-const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: "",
-};
-```
+   const firebaseConfig = {
+     apiKey: "",
+     authDomain: "",
+     projectId: "",
+     storageBucket: "",
+     messagingSenderId: "",
+     appId: "",
+   };
+   ```
+
+   또는 환경변수 추가
+
+   ```
+   API_KEY=
+   AUTH_DOMAIN=
+   PROJECT_ID=
+   STORAGE_BUCKET=
+   MESSAGING_SENDER_ID=
+   APP_ID=
+   ```
 
 3. 패키지 설치
 
-```
-$ yarn
-```
+   ```
+   $ yarn
+   ```
 
 4. 빌드
 
-```
-// 윈도우
-$ yarn build --win --x64
-// 맥
-$ yarn build --mac --x64
+   ```
+   // 윈도우
+   $ yarn build --win --x64
+   // 맥
+   $ yarn build --mac --x64
 
-```
+   ```
 
 5. `dist` 폴더에서 설치 파일 실행
 
