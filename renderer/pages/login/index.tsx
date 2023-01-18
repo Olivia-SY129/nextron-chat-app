@@ -30,7 +30,7 @@ const Form = styled("form")(({ theme }) => {
 const SignInPage = () => {
   const router = useRouter();
   const { signIn } = useUserAuth();
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

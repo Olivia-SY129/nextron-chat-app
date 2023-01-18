@@ -13,9 +13,10 @@ import {
   getChatRoomList,
 } from "../../lib/firebase/chats";
 import { getUserList } from "../../lib/firebase/users";
+import { TChatRoom } from "../../lib/types";
 
 const GroupChatPage = () => {
-  const [chatRooms, setChatRooms] = useState([]);
+  const [chatRooms, setChatRooms] = useState<TChatRoom[]>([]);
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   const handleCreateChat = () => {

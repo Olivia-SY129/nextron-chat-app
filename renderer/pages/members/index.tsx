@@ -5,6 +5,7 @@ import Layout from "../../components/common/Layout";
 import { auth } from "../../lib/firebase/app";
 import { addChatRooms, checkChatRoom } from "../../lib/firebase/chats";
 import { getUserList } from "../../lib/firebase/users";
+import { TUser } from "../../lib/types";
 
 const Member = styled("div")(({ theme }) => {
   return {
@@ -22,7 +23,7 @@ const Member = styled("div")(({ theme }) => {
 
 const MembersPage = () => {
   const router = useRouter();
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState<TUser[]>([]);
 
   const handleCreateDM = (member: string) => async () => {
     const users = [member, auth.currentUser?.email];

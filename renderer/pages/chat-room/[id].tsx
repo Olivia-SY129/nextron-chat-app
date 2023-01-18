@@ -6,6 +6,7 @@ import InputContainer from "../../components/chat/InputContainer";
 import MessageBox from "../../components/chat/MessageBox";
 import Layout from "../../components/common/Layout";
 import { addMessage, getMessageList } from "../../lib/firebase/chats";
+import { TMessage } from "../../lib/types";
 
 export const MARGIN = 20;
 
@@ -41,7 +42,7 @@ const ChatRoom = () => {
   const router = useRouter();
   const { id: chatRoomId } = router.query;
   const msgRef = useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<TMessage[]>([]);
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
