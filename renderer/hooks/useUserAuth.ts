@@ -1,9 +1,9 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../lib/firebase/app";
-import { addUser } from "../lib/firebase/users";
+} from 'firebase/auth';
+import { auth } from '../lib/firebase/app';
+import { addUser } from '../lib/firebase/users';
 
 export default function useUserAuth() {
   const signUp = async (email: string, password: string): Promise<string> => {
@@ -17,10 +17,10 @@ export default function useUserAuth() {
 
       if (uid) {
         await addUser(email);
-        return "success";
+        return 'success';
       }
 
-      return "auth/unknown-error";
+      return 'auth/unknown-error';
     } catch (error) {
       return error.code;
     }

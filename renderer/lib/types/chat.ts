@@ -1,4 +1,4 @@
-import { FieldValue } from "firebase/firestore";
+import { FieldValue } from 'firebase/firestore';
 
 export type TChatRoom = {
   id: string;

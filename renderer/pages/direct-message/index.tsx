@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import ChatBox from "../../components/chat/ChatBox";
-import Layout from "../../components/common/Layout";
-import { auth } from "../../lib/firebase/app";
-import { getChatRoomList } from "../../lib/firebase/chats";
-import { TChatRoom } from "../../lib/types";
+import { useEffect, useState } from 'react';
+import ChatBox from '../../components/chat/ChatBox';
+import Layout from '../../components/common/Layout';
+import { auth } from '../../lib/firebase/app';
+import { getChatRoomList } from '../../lib/firebase/chats';
+import { TChatRoom } from '../../lib/types';
 
 const DirectMessagePage = () => {
   const [chatRooms, setChatRooms] = useState<TChatRoom[]>([]);

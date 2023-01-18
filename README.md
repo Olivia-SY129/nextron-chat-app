@@ -27,12 +27,12 @@ React, Typescript, MUI, Nextron, firebase, git
    // renderer/lib/firebase/app.ts
 
    const firebaseConfig = {
-     apiKey: "",
-     authDomain: "",
-     projectId: "",
-     storageBucket: "",
-     messagingSenderId: "",
-     appId: "",
+     apiKey: '',
+     authDomain: '',
+     projectId: '',
+     storageBucket: '',
+     messagingSenderId: '',
+     appId: '',
    };
    ```
 

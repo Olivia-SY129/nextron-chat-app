@@ -1,34 +1,34 @@
-import { Button, FormControl, Input, InputLabel, styled } from "@mui/material";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import ErrorMsg from "../../components/common/ErrorMessage";
-import useUserAuth from "../../hooks/useUserAuth";
+import { Button, FormControl, Input, InputLabel, styled } from '@mui/material';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import ErrorMsg from '../../components/common/ErrorMessage';
+import useUserAuth from '../../hooks/useUserAuth';
 
-const Root = styled("div")(({ theme }) => {
+const Root = styled('div')(({ theme }) => {
   return {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: theme.spacing(4),
   };
 });
 
-const Form = styled("form")(({ theme }) => {
+const Form = styled('form')(({ theme }) => {
   return {
-    minWidth: "300px",
-    display: "flex",
-    flexDirection: "column",
+    minWidth: '300px',
+    display: 'flex',
+    flexDirection: 'column',
     paddingTop: theme.spacing(4),
-    gap: "30px",
+    gap: '30px',
   };
 });
 
 const SignupPage = () => {
   const router = useRouter();
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
 
   const { signUp } = useUserAuth();
 
@@ -48,40 +48,40 @@ const SignupPage = () => {
     const password = target.password.value;
     const confirmPassword = target.confirmPassword.value;
 
-    if (email === "" || password === "") {
-      setErrorMsg("모든 항목을 입력해주세요.");
+    if (email === '' || password === '') {
+      setErrorMsg('모든 항목을 입력해주세요.');
       target.submitButton.disabled = false;
       return;
     }
 
     if (password !== confirmPassword) {
-      setErrorMsg("비밀번호가 일치하지 않습니다.");
+      setErrorMsg('비밀번호가 일치하지 않습니다.');
       target.submitButton.disabled = false;
       return;
     }
 
     const checkSignUp = await signUp(email, password);
 
-    if (checkSignUp === "success") {
-      router.push("/login");
+    if (checkSignUp === 'success') {
+      router.push('/login');
       target.submitButton.disabled = false;
     } else {
-      if (checkSignUp === "auth/unknown-error") {
+      if (checkSignUp === 'auth/unknown-error') {
         setErrorMsg(
-          "알 수 없는 이유로 회원가입에 실패하셨습니다. 다시 시도해주세요."
+          '알 수 없는 이유로 회원가입에 실패하셨습니다. 다시 시도해주세요.'
         );
         target.submitButton.disabled = false;
 
         return;
       }
-      if (checkSignUp === "auth/weak-password") {
-        setErrorMsg("비밀번호는 6자 이상이어야 합니다.");
+      if (checkSignUp === 'auth/weak-password') {
+        setErrorMsg('비밀번호는 6자 이상이어야 합니다.');
         target.submitButton.disabled = false;
 
         return;
       }
-      if (checkSignUp === "auth/email-already-in-use") {
-        setErrorMsg("이미 존재하는 이메일입니다.");
+      if (checkSignUp === 'auth/email-already-in-use') {
+        setErrorMsg('이미 존재하는 이메일입니다.');
         target.submitButton.disabled = false;
         return;
       }

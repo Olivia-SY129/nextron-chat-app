@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "@mui/icons-material": "^5.11.0",
@@ -29,6 +30,8 @@
     "electron": "^21.3.3",
     "electron-builder": "^23.6.0",
     "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.1",
     "next": "^12.3.4",
     "nextron": "^8.4.0",

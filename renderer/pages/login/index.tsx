@@ -1,27 +1,27 @@
-import { Button, FormControl, Input, InputLabel, styled } from "@mui/material";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import ErrorMsg from "../../components/common/ErrorMessage";
-import useUserAuth from "../../hooks/useUserAuth";
-import { auth } from "../../lib/firebase/app";
+import { Button, FormControl, Input, InputLabel, styled } from '@mui/material';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import ErrorMsg from '../../components/common/ErrorMessage';
+import useUserAuth from '../../hooks/useUserAuth';
+import { auth } from '../../lib/firebase/app';
 
-const Root = styled("div")(({ theme }) => {
+const Root = styled('div')(({ theme }) => {
   return {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: theme.spacing(2),
   };
 });
 
-const Form = styled("form")(({ theme }) => {
+const Form = styled('form')(({ theme }) => {
   return {
-    minWidth: "300px",
-    display: "flex",
-    flexDirection: "column",
+    minWidth: '300px',
+    display: 'flex',
+    flexDirection: 'column',
     paddingTop: theme.spacing(2),
     gap: theme.spacing(4),
   };
@@ -30,7 +30,7 @@ const Form = styled("form")(({ theme }) => {
 const SignInPage = () => {
   const router = useRouter();
   const { signIn } = useUserAuth();
-  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,9 +49,9 @@ const SignInPage = () => {
     const isLogin = await signIn(email, password);
 
     if (isLogin) {
-      router.push("/home");
+      router.push('/home');
     } else {
-      setErrorMsg("잘못된 아이디 또는 비밀번호입니다. 다시 시도해주세요.");
+      setErrorMsg('잘못된 아이디 또는 비밀번호입니다. 다시 시도해주세요.');
     }
 
     target.submitButton.disabled = false;
@@ -59,7 +59,7 @@ const SignInPage = () => {
 
   useEffect(() => {
     if (auth.currentUser?.email) {
-      router.push("/home");
+      router.push('/home');
     }
   }, []);
 

@@ -1,28 +1,28 @@
-import { styled } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import { useEffect, useState } from "react";
-import { auth } from "../../lib/firebase/app";
+import { styled } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import { useEffect, useState } from 'react';
+import { auth } from '../../lib/firebase/app';
 
 interface IMessageType {
   name: string;
   user: string;
 }
 
-const Container = styled("div")<IMessageType>((props) => {
+const Container = styled('div')<IMessageType>((props) => {
   return {
-    display: "flex",
-    justifyContent: props.name === props.user ? "flex-end" : "flex-start",
-    flexWrap: "wrap",
+    display: 'flex',
+    justifyContent: props.name === props.user ? 'flex-end' : 'flex-start',
+    flexWrap: 'wrap',
   };
 });
 
-const Message = styled("div")<IMessageType>((props) => {
+const Message = styled('div')<IMessageType>((props) => {
   return {
     padding: 10,
     marginTop: 10,
     minWidth: 200,
     maxWidth: 300,
-    width: "fit-content",
+    width: 'fit-content',
     backgroundColor:
       props.name === props.user
         ? props.theme.palette.primary.main
@@ -31,8 +31,13 @@ const Message = styled("div")<IMessageType>((props) => {
   };
 });
 
-const MessageBox = ({ name, content }) => {
-  const [user, setUser] = useState("");
+interface Props {
+  name: string;
+  content: string;
+}
+
+const MessageBox = ({ name, content }: Props) => {
+  const [user, setUser] = useState('');
 
   useEffect(() => {
     setUser(auth.currentUser?.email);
@@ -48,7 +53,7 @@ const MessageBox = ({ name, content }) => {
           variant="subtitle1"
           color="white"
           sx={{
-            wordBreak: "break-all",
+            wordBreak: 'break-all',
           }}
         >
           {content}

@@ -1,15 +1,15 @@
-import ChatIcon from "@mui/icons-material/Chat";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import GroupIcon from "@mui/icons-material/Group";
-import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import { useRouter } from "next/router";
-import useUserAuth from "../../hooks/useUserAuth";
+import ChatIcon from '@mui/icons-material/Chat';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import GroupIcon from '@mui/icons-material/Group';
+import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import { useRouter } from 'next/router';
+import useUserAuth from '../../hooks/useUserAuth';
 
 const DrawerList = () => {
   const router = useRouter();
@@ -19,14 +19,14 @@ const DrawerList = () => {
     const isSignOut = await signOut();
 
     if (isSignOut) {
-      router.push("/login");
+      router.push('/login');
     }
   };
 
   return (
     <>
       <List>
-        <ListItem disablePadding onClick={() => router.push("/direct-message")}>
+        <ListItem disablePadding onClick={() => router.push('/direct-message')}>
           <ListItemButton>
             <ListItemIcon>
               <ChatIcon />
@@ -34,7 +34,7 @@ const DrawerList = () => {
             <ListItemText primary="Direct Message" />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding onClick={() => router.push("/group-chat")}>
+        <ListItem disablePadding onClick={() => router.push('/group-chat')}>
           <ListItemButton>
             <ListItemIcon>
               <GroupIcon />
@@ -45,7 +45,7 @@ const DrawerList = () => {
       </List>
       <Divider />
       <List>
-        <ListItem disablePadding onClick={() => router.push("/members")}>
+        <ListItem disablePadding onClick={() => router.push('/members')}>
           <ListItemButton>
             <ListItemIcon>
               <FavoriteIcon />

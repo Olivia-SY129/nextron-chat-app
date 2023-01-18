@@ -1,11 +1,14 @@
 import {
-  screen,
   BrowserWindow,
   BrowserWindowConstructorOptions,
+  screen,
 } from 'electron';
 import Store from 'electron-store';
 
-export default (windowName: string, options: BrowserWindowConstructorOptions): BrowserWindow => {
+export default (
+  windowName: string,
+  options: BrowserWindowConstructorOptions
+): BrowserWindow => {
   const key = 'window-state';
   const name = `window-state-${windowName}`;
   const store = new Store({ name });
@@ -13,10 +16,34 @@ export default (windowName: string, options: BrowserWindowConstructorOptions): B
     width: options.width,
     height: options.height,
   };
-  let state = {};
-  let win;
 
   const restore = () => store.get(key, defaultSize);
+
+  const ensureVisibleOnSomeDisplay = (windowState) => {
+    const visible = screen.getAllDisplays().some((display) => {
+      return windowWithinBounds(windowState, display.bounds);
+    });
+    if (!visible) {
+      // Window is partially or fully not visible now.
+      // Reset it to safe defaults.
+      return resetToDefaults();
+    }
+    return windowState;
+  };
+
+  const state = ensureVisibleOnSomeDisplay(restore());
+
+  const browserOptions: BrowserWindowConstructorOptions = {
+    ...state,
+    ...options,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      ...options.webPreferences,
+    },
+  };
+
+  const win = new BrowserWindow(browserOptions);
 
   const getCurrentPosition = () => {
     const position = win.getPosition();
@@ -46,37 +73,12 @@ export default (windowName: string, options: BrowserWindowConstructorOptions): B
     });
   };
 
-  const ensureVisibleOnSomeDisplay = windowState => {
-    const visible = screen.getAllDisplays().some(display => {
-      return windowWithinBounds(windowState, display.bounds);
-    });
-    if (!visible) {
-      // Window is partially or fully not visible now.
-      // Reset it to safe defaults.
-      return resetToDefaults();
-    }
-    return windowState;
-  };
-
   const saveState = () => {
     if (!win.isMinimized() && !win.isMaximized()) {
       Object.assign(state, getCurrentPosition());
     }
     store.set(key, state);
   };
-
-  state = ensureVisibleOnSomeDisplay(restore());
-
-  const browserOptions: BrowserWindowConstructorOptions = {
-    ...state,
-    ...options,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      ...options.webPreferences,
-    },
-  };
-  win = new BrowserWindow(browserOptions);
 
   win.on('close', saveState);
 
