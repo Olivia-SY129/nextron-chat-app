@@ -35,7 +35,7 @@ export default function Nav() {
   }, []);
 
   const toggleDrawer =
-    (state) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    (state: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
         event &&
         event.type === "keydown" &&

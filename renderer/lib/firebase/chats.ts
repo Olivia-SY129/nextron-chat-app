@@ -106,9 +106,10 @@ export const addUserInChatRoom = async (docId: string, user: string) => {
         users: [...docRef.data().users, user],
       });
     }
+    return true;
   } catch (e) {
-    alert("추가에 실패했습니다. 다시 시도해주세요.");
     console.log("Error adding user: ", e);
+    return false;
   }
 };
 

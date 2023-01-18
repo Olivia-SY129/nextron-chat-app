@@ -4,6 +4,7 @@ import ChatBox from "../../components/chat/ChatBox";
 import GroupChatConatiner from "../../components/chat/GroupChatConatiner";
 import UserAddForm from "../../components/chat/UserAddForm";
 import { ButtonContainer } from "../../components/common/ButtonContainer";
+import ErrorMsg from "../../components/common/ErrorMessage";
 import Layout from "../../components/common/Layout";
 import { auth } from "../../lib/firebase/app";
 import {
@@ -15,6 +16,7 @@ import { getUserList } from "../../lib/firebase/users";
 
 const GroupChatPage = () => {
   const [chatRooms, setChatRooms] = useState([]);
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
   const handleCreateChat = () => {
     addChatRooms([auth.currentUser.email], { isGroup: true });
@@ -33,7 +35,7 @@ const GroupChatPage = () => {
       const userToAdd = target.user.value;
 
       if (currentUsers.includes(userToAdd)) {
-        alert("이미 존재하는 유저입니다");
+        setErrorMsg("이미 존재하는 유저입니다");
         return;
       }
 
@@ -41,10 +43,17 @@ const GroupChatPage = () => {
       const userList = userDtoList.map((userDto) => userDto.email);
 
       if (userList.includes(userToAdd)) {
-        addUserInChatRoom(chatRoomId, userToAdd);
+        const isAdd = await addUserInChatRoom(chatRoomId, userToAdd);
+
+        if (!isAdd) {
+          setErrorMsg("추가에 실패했습니다. 다시 시도해주세요.");
+          return;
+        }
+
         target.user.value = "";
+        setErrorMsg("");
       } else {
-        alert("존재하지 않는 유저입니다");
+        setErrorMsg("존재하지 않는 유저입니다");
       }
     };
 
@@ -58,6 +67,7 @@ const GroupChatPage = () => {
         <Button variant="contained" onClick={handleCreateChat}>
           그룹 채팅방 생성하기
         </Button>
+        {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
       </ButtonContainer>
       {chatRooms.map((chatRoom) => (
         <GroupChatConatiner key={chatRoom.id}>
