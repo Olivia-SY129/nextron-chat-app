@@ -17,7 +17,7 @@ const Container = styled("div")(({ theme }) => {
     background: "white",
     cursor: "pointer",
     ":hover": {
-      background: theme.palette.primary.light,
+      background: theme.palette.primary.contrastText,
     },
   };
 });

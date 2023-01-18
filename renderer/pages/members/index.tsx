@@ -11,12 +11,13 @@ const Member = styled("div")(({ theme }) => {
   return {
     padding: 20,
     paddingLeft: 30,
-    borderBottom: `1px solid ${theme.palette.primary.dark}`,
+    borderBottom: `1px solid ${theme.palette.primary.light}`,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    backgroundColor: "white",
     ":hover": {
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.primary.contrastText,
     },
   };
 });
