@@ -44,16 +44,21 @@ const MembersPage = () => {
 
   return (
     <Layout>
-      {members.map((member) => (
-        <Member key={member.id}>
-          <div>{member.email}</div>
-          {auth.currentUser?.email !== member.email ? (
-            <Button onClick={handleCreateDM(member.email)}>1:1 채팅</Button>
-          ) : (
-            <span>나</span>
-          )}
+      <>
+        <Member>
+          <div>{auth.currentUser?.email}</div>
+          <span>나</span>
         </Member>
-      ))}
+        {members.map(
+          (member) =>
+            auth.currentUser?.email !== member.email && (
+              <Member key={member.id}>
+                <div>{member.email}</div>
+                <Button onClick={handleCreateDM(member.email)}>1:1 채팅</Button>
+              </Member>
+            )
+        )}
+      </>
     </Layout>
   );
 };
