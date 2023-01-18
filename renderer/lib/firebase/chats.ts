@@ -141,7 +141,7 @@ export const checkChatRoom = async (user: string[]) => {
 
 export const getChatRoomList = async (
   user: string,
-  setter: (value: React.SetStateAction<any[]>) => void,
+  setter: (value: React.SetStateAction<unknown[]>) => void,
   options: {
     isGroup: boolean;
   }
