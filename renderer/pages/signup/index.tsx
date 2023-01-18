@@ -38,7 +38,11 @@ const SignupPage = () => {
       email: { value: string };
       password: { value: string };
       confirmPassword: { value: string };
+      submitButton: { disabled: boolean };
     };
+
+    // 제출 시 버튼 비활성화
+    target.submitButton.disabled = true;
 
     const email = target.email.value;
     const password = target.password.value;
@@ -46,11 +50,13 @@ const SignupPage = () => {
 
     if (email === "" || password === "") {
       setErrorMsg("모든 항목을 입력해주세요.");
+      target.submitButton.disabled = false;
       return;
     }
 
     if (password !== confirmPassword) {
       setErrorMsg("비밀번호가 일치하지 않습니다.");
+      target.submitButton.disabled = false;
       return;
     }
 
@@ -58,19 +64,25 @@ const SignupPage = () => {
 
     if (checkSignUp === "success") {
       router.push("/login");
+      target.submitButton.disabled = false;
     } else {
       if (checkSignUp === "auth/unknown-error") {
         setErrorMsg(
           "알 수 없는 이유로 회원가입에 실패하셨습니다. 다시 시도해주세요."
         );
+        target.submitButton.disabled = false;
+
         return;
       }
       if (checkSignUp === "auth/weak-password") {
         setErrorMsg("비밀번호는 6자 이상이어야 합니다.");
+        target.submitButton.disabled = false;
+
         return;
       }
       if (checkSignUp === "auth/email-already-in-use") {
         setErrorMsg("이미 존재하는 이메일입니다.");
+        target.submitButton.disabled = false;
         return;
       }
     }
@@ -100,7 +112,7 @@ const SignupPage = () => {
             <InputLabel>Confirm Password</InputLabel>
             <Input type="password" name="confirmPassword" />
           </FormControl>
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" name="submitButton">
             회원가입
           </Button>
         </Form>

@@ -6,7 +6,7 @@ import { auth } from "../lib/firebase/app";
 import { addUser } from "../lib/firebase/users";
 
 export default function useUserAuth() {
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string): Promise<string> => {
     try {
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
@@ -22,7 +22,6 @@ export default function useUserAuth() {
 
       return "auth/unknown-error";
     } catch (error) {
-      console.log(error.code);
       return error.code;
     }
   };

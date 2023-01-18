@@ -37,7 +37,11 @@ const SignInPage = () => {
     const target = e.target as typeof e.target & {
       email: { value: string };
       password: { value: string };
+      submitButton: { disabled: boolean };
     };
+
+    // 제출 시 버튼 비활성화
+    target.submitButton.disabled = true;
 
     const email = target.email.value;
     const password = target.password.value;
@@ -49,6 +53,8 @@ const SignInPage = () => {
     } else {
       setErrorMsg("잘못된 아이디 또는 비밀번호입니다. 다시 시도해주세요.");
     }
+
+    target.submitButton.disabled = false;
   };
 
   useEffect(() => {
@@ -73,7 +79,7 @@ const SignInPage = () => {
             <InputLabel>Password</InputLabel>
             <Input type="password" name="password" />
           </FormControl>
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" name="submitButton">
             로그인
           </Button>
         </Form>
