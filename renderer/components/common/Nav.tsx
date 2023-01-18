@@ -73,7 +73,7 @@ export default function Nav() {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            마음연구소 - MAUM LAB
+            My Chat App
           </Typography>
           {isLogin ? (
             <IconButton
