@@ -7,6 +7,7 @@ import MessageBox from "../../components/chat/MessageBox";
 import ErrorMsg from "../../components/common/ErrorMessage";
 import Layout from "../../components/common/Layout";
 import { addMessage, getMessageList } from "../../lib/firebase/chats";
+import { removeWhiteSpace } from "../../lib/string";
 import { TMessage } from "../../lib/types";
 
 export const MARGIN = 20;
@@ -54,7 +55,7 @@ const ChatRoom = () => {
 
     const value = e.target["msg-input"].value;
 
-    if (value === "") {
+    if (removeWhiteSpace(value) === "") {
       setErrorMsg("내용을 입력해주세요");
       return;
     }
