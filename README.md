@@ -127,7 +127,7 @@ Electron을 처음 접한 프로젝트였고, Main 스레드를 이용한 구조
 
 2. Firebase
 
-firebase/auth로 인증/인가를 구현했다. 처음에는 Main 스레드에서 firebase-admin을 통해 유저를 관리하고 싶었지만 낮은 보안성을 우려하여 firestore로 유저를 관리하였다.
+firebase/auth로 인증/인가를 구현했다. 처음에는 Main 스레드에서 firebase-admin을 통해 유저를 관리하고 싶었지만 낮은 보안성을 우려하여 firestore로 유저를 관리하였다. 유저는 본래 id로 관리해야하지만 실제 구현에서는 편의상 unique한 값인 email을 id 대신 사용하였다.
 
 채팅은 firebase의 실시간 통신을 사용했다. 해당 기능을 처음 사용해보았는데 웹소켓 통신의 구현없이 간편하게 사용할 수 있었다. 빠르게 프로토타입을 구현할 때 편리하게 사용할 수 있을 것 같다.
 
