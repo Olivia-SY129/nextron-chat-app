@@ -16,13 +16,14 @@ export default function useUserAuth() {
       const { uid } = userCredentials.user;
 
       if (uid) {
-        const refId = await addUser(email);
-        return !!refId;
+        await addUser(email);
+        return "success";
       }
 
-      return false;
+      return "auth/unknown-error";
     } catch (error) {
-      return false;
+      console.log(error.code);
+      return error.code;
     }
   };
 

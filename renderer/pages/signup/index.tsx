@@ -54,12 +54,25 @@ const SignupPage = () => {
       return;
     }
 
-    const isSignUp = await signUp(email, password);
+    const checkSignUp = await signUp(email, password);
 
-    if (isSignUp) {
+    if (checkSignUp === "success") {
       router.push("/login");
     } else {
-      setErrorMsg("회원가입에 실패하셨습니다. 다시 시도해주세요.");
+      if (checkSignUp === "auth/unknown-error") {
+        setErrorMsg(
+          "알 수 없는 이유로 회원가입에 실패하셨습니다. 다시 시도해주세요."
+        );
+        return;
+      }
+      if (checkSignUp === "auth/weak-password") {
+        setErrorMsg("비밀번호는 6자 이상이어야 합니다.");
+        return;
+      }
+      if (checkSignUp === "auth/email-already-in-use") {
+        setErrorMsg("이미 존재하는 이메일입니다.");
+        return;
+      }
     }
   };
 
@@ -77,7 +90,11 @@ const SignupPage = () => {
           </FormControl>
           <FormControl>
             <InputLabel>Password</InputLabel>
-            <Input type="password" name="password" />
+            <Input
+              type="password"
+              name="password"
+              placeholder="6자리 이상의 비밀번호"
+            />
           </FormControl>
           <FormControl>
             <InputLabel>Confirm Password</InputLabel>

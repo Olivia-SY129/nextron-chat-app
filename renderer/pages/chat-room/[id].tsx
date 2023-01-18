@@ -49,6 +49,9 @@ const ChatRoom = () => {
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // 에러 메세지 초기화
+    setErrorMsg("");
+
     const value = e.target["msg-input"].value;
 
     if (typeof chatRoomId === "string") {
@@ -60,8 +63,9 @@ const ChatRoom = () => {
       }
     }
 
+    // 메세지 전송 성공 시 input 내용 삭제
+    // (통신이 느릴 경우 input이 느리게 지워질 수 있음)
     e.target["msg-input"].value = "";
-    setErrorMsg("");
   };
 
   useEffect(() => {
