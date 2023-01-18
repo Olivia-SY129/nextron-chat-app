@@ -35,6 +35,11 @@ const GroupChatPage = () => {
       };
       const userToAdd = target.user.value;
 
+      if (userToAdd === "") {
+        setErrorMsg("유저 이메일을 입력하세요");
+        return;
+      }
+
       if (currentUsers.includes(userToAdd)) {
         setErrorMsg("이미 존재하는 유저입니다");
         return;
@@ -75,7 +80,7 @@ const GroupChatPage = () => {
           <ChatBox chatRoomId={chatRoom.id} users={chatRoom.users} />
           <UserAddForm onSubmit={handleAddUser(chatRoom.id, chatRoom.users)}>
             <TextField
-              type="text"
+              type="email"
               name="user"
               size="small"
               placeholder="이메일을 적어주세요"

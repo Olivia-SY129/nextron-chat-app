@@ -54,6 +54,11 @@ const ChatRoom = () => {
 
     const value = e.target["msg-input"].value;
 
+    if (value === "") {
+      setErrorMsg("내용을 입력해주세요");
+      return;
+    }
+
     if (typeof chatRoomId === "string") {
       const isSent = await addMessage(value, chatRoomId);
 
