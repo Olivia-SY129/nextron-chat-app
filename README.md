@@ -27,12 +27,12 @@ React, Typescript, MUI, Nextron, firebase, git
    // renderer/lib/firebase/app.ts
 
    const firebaseConfig = {
-     apiKey: "",
-     authDomain: "",
-     projectId: "",
-     storageBucket: "",
-     messagingSenderId: "",
-     appId: "",
+   	apiKey: '',
+   	authDomain: '',
+   	projectId: '',
+   	storageBucket: '',
+   	messagingSenderId: '',
+   	appId: '',
    };
    ```
 
@@ -151,3 +151,9 @@ Next.js 프로젝트를 사용한 경험이 있기 때문에 서버를 이용한
 4. Typescript
 
 타입스크립트는 평소 많이 사용하는데 초기 프로젝트 생성 이후 eslint 설정을 하지 않아 이곳 저곳 타입 작성을 빠뜨리는 참사가 있었다. 프로젝트 세팅에서 linter의 소중함을 알게 되는 좋은 계기였다.
+
+### 리팩토링
+
+(~2023.1.20)
+코드의 변수를 명확히 바꾸고, 일부 파일에서 다른 채팅방과 메시지를 함께 관리하여 이를 분리했다.
+추후 prettier를 추가할 예정이다.
