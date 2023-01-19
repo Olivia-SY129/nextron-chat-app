@@ -11,12 +11,12 @@ import {
   serverTimestamp,
   updateDoc,
   where,
-} from 'firebase/firestore';
-import { auth, db } from './app';
+} from "firebase/firestore";
+import { auth, db } from "./app";
 
 export const addMessage = async (text: string, chatRoomId: string) => {
   try {
-    const docRef = await addDoc(collection(db, 'messages'), {
+    const docRef = await addDoc(collection(db, "messages"), {
       text,
       createdAt: serverTimestamp(),
       user: auth.currentUser.email,
@@ -24,7 +24,7 @@ export const addMessage = async (text: string, chatRoomId: string) => {
     });
     return !!docRef.id;
   } catch (e) {
-    console.error('Error adding document: ', e);
+    console.error("Error adding document: ", e);
   }
 };
 
@@ -33,11 +33,11 @@ export const getMessageList = (
   setter: (value: React.SetStateAction<unknown[]>) => void
 ) => {
   try {
-    const messagesRef = collection(db, 'messages');
+    const messagesRef = collection(db, "messages");
     const messagesQuery = query(
       messagesRef,
-      orderBy('createdAt'),
-      where('chatRoomId', '==', chatRoomId)
+      orderBy("createdAt"),
+      where("chatRoomId", "==", chatRoomId)
     );
 
     onSnapshot(messagesQuery, (snapshot) => {
@@ -48,7 +48,7 @@ export const getMessageList = (
       setter(messages);
     });
   } catch (e) {
-    console.error('Error fetching document: ', e);
+    console.error("Error fetching document: ", e);
   }
 };
 
@@ -57,12 +57,12 @@ export const getLastChat = (
   setter: (value: React.SetStateAction<string>) => void
 ) => {
   try {
-    const messagesRef = collection(db, 'messages');
+    const messagesRef = collection(db, "messages");
     const messagesQuery = query(
       messagesRef,
-      orderBy('createdAt', 'desc'),
+      orderBy("createdAt", "desc"),
       limit(1),
-      where('chatRoomId', '==', chatRoomId)
+      where("chatRoomId", "==", chatRoomId)
     );
 
     onSnapshot(messagesQuery, (snapshot) => {
@@ -73,11 +73,11 @@ export const getLastChat = (
         const text = messages[0].text;
         setter(text);
       } else {
-        setter('');
+        setter("");
       }
     });
   } catch (e) {
-    console.error('Error fetching document: ', e);
+    console.error("Error fetching document: ", e);
   }
 };
 
@@ -86,7 +86,7 @@ export const addChatRooms = async (
   options?: { isGroup?: boolean }
 ) => {
   try {
-    const docRef = await addDoc(collection(db, 'chatRooms'), {
+    const docRef = await addDoc(collection(db, "chatRooms"), {
       createdAt: serverTimestamp(),
       createdBy: auth.currentUser.email,
       users,
@@ -94,33 +94,33 @@ export const addChatRooms = async (
     });
     return docRef.id;
   } catch (e) {
-    console.error('Error adding document: ', e);
+    console.error("Error adding document: ", e);
   }
 };
 
 export const addUserInChatRoom = async (docId: string, user: string) => {
   try {
-    const docRef = await getDoc(doc(db, 'chatRooms', docId));
+    const docRef = await getDoc(doc(db, "chatRooms", docId));
     if (docRef.id) {
-      await updateDoc(doc(db, 'chatRooms', docId), {
+      await updateDoc(doc(db, "chatRooms", docId), {
         users: [...docRef.data().users, user],
       });
     }
     return true;
   } catch (e) {
-    console.log('Error adding user: ', e);
+    console.log("Error adding user: ", e);
     return false;
   }
 };
 
 export const checkChatRoom = async (user: string[]) => {
   try {
-    const docRef = collection(db, 'chatRooms');
+    const docRef = collection(db, "chatRooms");
     const chatRoomQuery = query(
       docRef,
-      orderBy('createdAt'),
-      where('users', 'array-contains', user[0]),
-      where('isGroup', '==', false)
+      orderBy("createdAt"),
+      where("users", "array-contains", user[0]),
+      where("isGroup", "==", false)
     );
 
     const snapshot = await getDocs(chatRoomQuery);
@@ -136,7 +136,7 @@ export const checkChatRoom = async (user: string[]) => {
 
     return chatRoomId;
   } catch (e) {
-    console.error('Error adding document: ', e);
+    console.error("Error adding document: ", e);
   }
 };
 
@@ -148,12 +148,12 @@ export const getChatRoomList = async (
   }
 ) => {
   try {
-    const chatRoomRef = collection(db, 'chatRooms');
+    const chatRoomRef = collection(db, "chatRooms");
     const chatRoomQuery = query(
       chatRoomRef,
-      orderBy('createdAt'),
-      where('users', 'array-contains', user),
-      where('isGroup', '==', options.isGroup)
+      orderBy("createdAt"),
+      where("users", "array-contains", user),
+      where("isGroup", "==", options.isGroup)
     );
 
     onSnapshot(chatRoomQuery, (snapshot) => {
@@ -164,6 +164,6 @@ export const getChatRoomList = async (
       setter(chatRooms);
     });
   } catch (e) {
-    console.error('Error fetching document: ', e);
+    console.error("Error fetching document: ", e);
   }
 };

@@ -1,23 +1,23 @@
-import { Button, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import ChatBox from '../../components/chat/ChatBox';
-import GroupChatConatiner from '../../components/chat/GroupChatConatiner';
-import UserAddForm from '../../components/chat/UserAddForm';
-import { ButtonContainer } from '../../components/common/ButtonContainer';
-import ErrorMsg from '../../components/common/ErrorMessage';
-import Layout from '../../components/common/Layout';
-import { auth } from '../../lib/firebase/app';
+import { Button, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import ChatBox from "../../components/chat/ChatBox";
+import GroupChatConatiner from "../../components/chat/GroupChatConatiner";
+import UserAddForm from "../../components/chat/UserAddForm";
+import { ButtonContainer } from "../../components/common/ButtonContainer";
+import ErrorMsg from "../../components/common/ErrorMessage";
+import Layout from "../../components/common/Layout";
+import { auth } from "../../lib/firebase/app";
 import {
   addChatRooms,
   addUserInChatRoom,
   getChatRoomList,
-} from '../../lib/firebase/chats';
-import { getUserList } from '../../lib/firebase/users';
-import { TChatRoom } from '../../lib/types';
+} from "../../lib/firebase/chats";
+import { getUserList } from "../../lib/firebase/users";
+import { TChatRoom } from "../../lib/types";
 
 const GroupChatPage = () => {
   const [chatRooms, setChatRooms] = useState<TChatRoom[]>([]);
-  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
   const handleCreateChat = () => {
     addChatRooms([auth.currentUser.email], { isGroup: true });
@@ -35,13 +35,13 @@ const GroupChatPage = () => {
       };
       const userToAdd = target.user.value;
 
-      if (userToAdd === '') {
-        setErrorMsg('유저 이메일을 입력하세요');
+      if (userToAdd === "") {
+        setErrorMsg("유저 이메일을 입력하세요");
         return;
       }
 
       if (currentUsers.includes(userToAdd)) {
-        setErrorMsg('이미 존재하는 유저입니다');
+        setErrorMsg("이미 존재하는 유저입니다");
         return;
       }
 
@@ -52,14 +52,14 @@ const GroupChatPage = () => {
         const isAdd = await addUserInChatRoom(chatRoomId, userToAdd);
 
         if (!isAdd) {
-          setErrorMsg('추가에 실패했습니다. 다시 시도해주세요.');
+          setErrorMsg("추가에 실패했습니다. 다시 시도해주세요.");
           return;
         }
 
-        target.user.value = '';
-        setErrorMsg('');
+        target.user.value = "";
+        setErrorMsg("");
       } else {
-        setErrorMsg('존재하지 않는 유저입니다');
+        setErrorMsg("존재하지 않는 유저입니다");
       }
     };
 

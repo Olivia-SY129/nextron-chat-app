@@ -1,18 +1,18 @@
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import MenuIcon from '@mui/icons-material/Menu';
-import { SwipeableDrawer } from '@mui/material';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { auth } from '../../lib/firebase/app';
-import DrawerList from './Drawer';
-const anchor = 'right';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import MenuIcon from "@mui/icons-material/Menu";
+import { SwipeableDrawer } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { auth } from "../../lib/firebase/app";
+import DrawerList from "./Drawer";
+const anchor = "right";
 
 export default function Nav() {
   const router = useRouter();
@@ -24,7 +24,7 @@ export default function Nav() {
     setLogin(authState);
 
     if (!authState) {
-      router.push('/login');
+      router.push("/login");
     }
   });
 
@@ -38,9 +38,9 @@ export default function Nav() {
     (state: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
         event &&
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
       ) {
         return;
       }

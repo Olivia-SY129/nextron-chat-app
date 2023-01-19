@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react';
-import Nav from './Nav';
+import { PropsWithChildren } from "react";
+import Nav from "./Nav";
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
